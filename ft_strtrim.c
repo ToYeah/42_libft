@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: totaisei <totaisei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 15:23:48 by totaisei          #+#    #+#             */
-/*   Updated: 2020/10/14 20:56:51 by totaisei         ###   ########.fr       */
+/*   Updated: 2022/02/15 19:08:03 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static	int	is_set(char c, char const *set)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (set[i])
@@ -26,7 +26,7 @@ static	int	is_set(char c, char const *set)
 	return (FALSE);
 }
 
-char		*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	const char	*start;
 	char		*res;
@@ -46,7 +46,8 @@ char		*ft_strtrim(char const *s1, char const *set)
 	j = len - 1;
 	while (is_set(s1[j], set) && s1[j])
 		j--;
-	if (!(res = malloc(sizeof(char) * (j - i + 2))))
+	res = malloc(sizeof(char) * (j - i + 2));
+	if (!res)
 		return (NULL);
 	ft_strlcpy(res, start, j - i + 2);
 	return (res);

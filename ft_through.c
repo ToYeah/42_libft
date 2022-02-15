@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_through.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/08 22:11:19 by totaisei          #+#    #+#             */
-/*   Updated: 2022/02/15 20:09:01 by totaisei         ###   ########.fr       */
+/*   Created: 2021/01/04 13:15:36 by totaisei          #+#    #+#             */
+/*   Updated: 2021/01/04 14:19:48 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int c)
+char	*ft_through_space(char *str)
 {
-	if (('0' <= c && c <= '9')
-		|| ('A' <= c && c <= 'Z')
-		|| ('a' <= c && c <= 'z'))
-		return (1);
-	return (0);
+	if (!str)
+		return (NULL);
+	while (*str && *str == ' ')
+		str++;
+	return (str);
+}
+
+char	*ft_through_digit(char *str)
+{
+	if (!str)
+		return (NULL);
+	while (*str && ft_isdigit(*str))
+		str++;
+	return (str);
 }

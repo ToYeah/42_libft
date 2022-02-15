@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: totaisei <totaisei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 01:16:12 by totaisei          #+#    #+#             */
-/*   Updated: 2020/10/13 14:57:14 by totaisei         ###   ########.fr       */
+/*   Updated: 2022/02/15 20:06:19 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	char c1;
-	char c2;
+	char	c1;
+	char	c2;
 
 	if ((unsigned char)c <= 127)
 		write(fd, &c, 1);

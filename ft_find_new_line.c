@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_find_new_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/08 22:11:19 by totaisei          #+#    #+#             */
-/*   Updated: 2022/02/15 20:09:01 by totaisei         ###   ########.fr       */
+/*   Created: 2020/12/15 14:11:52 by totaisei          #+#    #+#             */
+/*   Updated: 2022/02/15 19:09:25 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int c)
+char	*ft_find_new_line(const char *s, size_t len)
 {
-	if (('0' <= c && c <= '9')
-		|| ('A' <= c && c <= 'Z')
-		|| ('a' <= c && c <= 'z'))
-		return (1);
-	return (0);
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	i = 0;
+	while (s[i] != '\n')
+	{
+		if (!(i < len))
+			return (NULL);
+		i++;
+	}
+	return ((char *)&s[i]);
 }

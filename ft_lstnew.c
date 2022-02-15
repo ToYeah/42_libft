@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: totaisei <totaisei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 17:00:50 by totaisei          #+#    #+#             */
-/*   Updated: 2020/10/11 17:09:27 by totaisei         ###   ########.fr       */
+/*   Updated: 2022/02/15 19:22:58 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list *res;
+	t_list	*res;
 
-	if (!(res = malloc(sizeof(t_list) * 1)))
+	res = malloc(sizeof(t_list) * 1);
+	if (!res)
 		return (NULL);
 	res->content = content;
 	res->next = NULL;

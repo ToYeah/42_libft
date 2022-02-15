@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 13:20:48 by totaisei          #+#    #+#             */
-/*   Updated: 2020/10/10 13:46:40 by totaisei         ###   ########.fr       */
+/*   Updated: 2022/02/15 19:57:04 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,21 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*res;
+	char	*result;
 	int		i;
 	size_t	len;
 
 	len = 1;
 	i = 0;
-	if (s1)
-		len += ft_strlen(s1);
-	if (s2)
-		len += ft_strlen(s2);
-	if (!(res = malloc(sizeof(char) * len)))
+	len += ft_strlen(s1);
+	len += ft_strlen(s2);
+	result = malloc(sizeof(char) * len);
+	if (!result)
 		return (NULL);
-	if (s1)
-		while (*s1)
-			res[i++] = *s1++;
-	if (s2)
-		while (*s2)
-			res[i++] = *s2++;
-	res[i] = '\0';
-	return (res);
+	while (s1 && *s1)
+		result[i++] = *s1++;
+	while (s2 && *s2)
+		result[i++] = *s2++;
+	result[i] = '\0';
+	return (result);
 }

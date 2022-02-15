@@ -6,7 +6,7 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 14:15:53 by totaisei          #+#    #+#             */
-/*   Updated: 2022/02/15 19:49:11 by totaisei         ###   ########.fr       */
+/*   Updated: 2022/02/15 19:56:09 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static int	finish_gnl(char **storage, char *buf, char **line)
 static int	loop_gnl(int fd, char **storage, char *buf, char **line)
 {
 	char		*tmp;
+	size_t		len;
 	ssize_t		read_len;
 
 	while (1)
@@ -59,17 +60,14 @@ static int	loop_gnl(int fd, char **storage, char *buf, char **line)
 		if (read_len < 0)
 			return (free_all(*storage, buf, *line));
 		buf[read_len] = '\0';
+		len = GNL_BUFFER_SIZE;
 		if (read_len < GNL_BUFFER_SIZE)
-		{
-			tmp = ft_find_new_line(buf, read_len);
-			if (tmp)
-				return (success_gnl(tmp, storage, buf, line));
-			else
-				return (finish_gnl(storage, buf, line));
-		}
-		tmp = ft_find_new_line(buf, GNL_BUFFER_SIZE);
+			len = read_len;
+		tmp = ft_find_new_line(buf, len);
 		if (tmp)
 			return (success_gnl(tmp, storage, buf, line));
+		if (read_len < GNL_BUFFER_SIZE && !tmp)
+			return (finish_gnl(storage, buf, line));
 		tmp = ft_strjoin(*storage, buf);
 		if (!tmp)
 			return (free_all(*storage, buf, *line));
@@ -88,9 +86,14 @@ int	ft_get_next_line(int fd, char **line)
 	if (!line || fd < 0 || GNL_BUFFER_SIZE <= 0)
 		return (free_all(storage, buf, NULL));
 	*line = NULL;
-	if (storage && (tmp = ft_find_new_line(storage, ft_strlen(storage))))
-		return (success_gnl(tmp, &storage, buf, line));
-	if (!(buf = malloc(GNL_BUFFER_SIZE + 1)))
+	if (storage)
+	{
+		tmp = ft_find_new_line(storage, ft_strlen(storage));
+		if (tmp)
+			return (success_gnl(tmp, &storage, buf, line));
+	}
+	buf = malloc(GNL_BUFFER_SIZE + 1);
+	if (!buf)
 		return (free_all(storage, buf, *line));
 	return (loop_gnl(fd, &storage, buf, line));
 }

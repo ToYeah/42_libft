@@ -6,11 +6,22 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 12:53:58 by totaisei          #+#    #+#             */
-/*   Updated: 2020/10/10 16:56:16 by totaisei         ###   ########.fr       */
+/*   Updated: 2022/02/15 19:32:17 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static char	*make_emptyline(void)
+{
+	char	*res;
+
+	res = malloc(sizeof(char));
+	if (!res)
+		return (NULL);
+	*res = '\0';
+	return (res);
+}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -21,14 +32,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (len == 0 || start > ft_strlen(s))
-	{
-		if (!(res = malloc(sizeof(char))))
-			return (NULL);
-		*res = '\0';
-		return (res);
-	}
-	char_count = ft_strlen(&s[start]) > len ? len : ft_strlen(&s[start]);
-	if (!(res = malloc(sizeof(char) * (char_count + 1))))
+		return (make_emptyline());
+	char_count = len;
+	if (!(ft_strlen(&s[start]) > len))
+		char_count = ft_strlen(&s[start]);
+	res = malloc(sizeof(char) * (char_count + 1));
+	if (!res)
 		return (NULL);
 	i = 0;
 	while (i < len && s[start + i])

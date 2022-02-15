@@ -6,28 +6,30 @@
 /*   By: totaisei <totaisei@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 22:47:54 by totaisei          #+#    #+#             */
-/*   Updated: 2020/10/19 12:21:17 by totaisei         ###   ########.fr       */
+/*   Updated: 2022/02/15 20:08:08 by totaisei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*zero_itoa(void)
+static char	*zero_itoa(void)
 {
-	char *res;
+	char	*res;
 
-	if (!(res = malloc(sizeof(char) * 2)))
+	res = malloc(sizeof(char) * 2);
+	if (!res)
 		return (NULL);
 	res[0] = '0';
 	res[1] = '\0';
 	return (res);
 }
 
-static char		*setup_sign_null(int digit, int sign)
+static char	*setup_sign_null(int digit, int sign)
 {
-	char *res;
+	char	*res;
 
-	if (!(res = malloc(sizeof(char) * digit + 1 + (sign * -1))))
+	res = malloc(sizeof(char) * digit + 1 + (sign * -1));
+	if (!res)
 		return (NULL);
 	res[digit + (sign * -1)] = '\0';
 	if (sign)
@@ -35,7 +37,7 @@ static char		*setup_sign_null(int digit, int sign)
 	return (res);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	int		digit;
 	int		sign;
@@ -49,7 +51,8 @@ char			*ft_itoa(int n)
 	if (n < 0)
 		sign = -1;
 	digit = ft_nbrdig(n);
-	if (!(res = setup_sign_null(digit, sign)))
+	res = setup_sign_null(digit, sign);
+	if (!res)
 		return (NULL);
 	i = digit + (sign * -1) - 1;
 	tmp = n;
